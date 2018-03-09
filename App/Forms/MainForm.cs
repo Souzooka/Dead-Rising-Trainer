@@ -8,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Drawing.Imaging;
 using QuickPoke.Forms;
+using TrainerSpace;
 
 
 
@@ -17,8 +18,6 @@ namespace Ascension.Forms.Dialog.Extras
 {
     public partial class MainForm : Form
     {
-        TreeNode OFF = new TreeNode();
-        TreeNode OFF2 = new TreeNode();
         public MainForm()
         {
             InitializeComponent();
@@ -28,9 +27,6 @@ namespace Ascension.Forms.Dialog.Extras
         }
         private bool _dragging = false;
         private Point _start_point = new Point(0, 0);
-        private void xex_offset_manager_Load(object sender, EventArgs e)
-        {
-        }
         //#===================================GLOBAL CODE=================================================================
 
         private void connectBtn_Click(object sender, EventArgs e)
@@ -44,10 +40,9 @@ namespace Ascension.Forms.Dialog.Extras
             }
             else
             {
-                //TODO: store process on some sort of static variable
-
                 process = processes[0];
                 connectTxt.Text = $"Connected to PID {process.Id.ToString("X8")}";
+                Trainer.Process = process;
             }
         }
 

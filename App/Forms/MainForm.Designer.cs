@@ -509,7 +509,6 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.xex_offset_manager_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.xex_offset_manager_KeyDown);
             this.MainTabControl.ResumeLayout(false);
             this.PAGE1.ResumeLayout(false);

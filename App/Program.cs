@@ -14,15 +14,6 @@ namespace QuickPoke
         [STAThread]
         static void Main()
         {
-            try
-            {
-
-            }
-            catch { }
-            try
-            { }
-            catch
-            { }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
