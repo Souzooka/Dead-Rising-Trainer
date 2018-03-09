@@ -275,9 +275,9 @@ namespace Ascension.Forms.Dialog.Extras
             MainTabControl.SelectedTab = PAGE1; //KEEP
         }
 
-        private void metroCheckBox8_CheckedChanged(object sender, EventArgs e)
+        private void debugCameraCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (TEST.Checked == true)
+            if (debugCameraCheckBox.Checked == true)
             {
                 MessageBox.Show("Shit, you did something.");
             }

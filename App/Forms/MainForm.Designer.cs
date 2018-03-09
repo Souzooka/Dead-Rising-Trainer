@@ -31,8 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainTabControl = new MetroFramework.Controls.MetroTabControl();
             this.PAGE1 = new MetroFramework.Controls.MetroTabPage();
+            this.connectTxt = new System.Windows.Forms.Label();
+            this.connectBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.TEST = new MetroFramework.Controls.MetroCheckBox();
+            this.debugCameraCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.PAGE2 = new MetroFramework.Controls.MetroTabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
@@ -54,8 +56,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.connectBtn = new System.Windows.Forms.Button();
-            this.connectTxt = new System.Windows.Forms.Label();
             this.MainTabControl.SuspendLayout();
             this.PAGE1.SuspendLayout();
             this.PAGE2.SuspendLayout();
@@ -89,7 +89,7 @@
             this.PAGE1.Controls.Add(this.connectTxt);
             this.PAGE1.Controls.Add(this.connectBtn);
             this.PAGE1.Controls.Add(this.label2);
-            this.PAGE1.Controls.Add(this.TEST);
+            this.PAGE1.Controls.Add(this.debugCameraCheckBox);
             this.PAGE1.HorizontalScrollbarBarColor = true;
             this.PAGE1.HorizontalScrollbarHighlightOnWheel = false;
             this.PAGE1.HorizontalScrollbarSize = 10;
@@ -107,6 +107,27 @@
             this.PAGE1.Click += new System.EventHandler(this.FunctionsBeta_Click);
             this.PAGE1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FunctionsBeta_PreviewKeyDown);
             // 
+            // connectTxt
+            // 
+            this.connectTxt.AutoSize = true;
+            this.connectTxt.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.connectTxt.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.connectTxt.Location = new System.Drawing.Point(89, 16);
+            this.connectTxt.Name = "connectTxt";
+            this.connectTxt.Size = new System.Drawing.Size(131, 19);
+            this.connectTxt.TabIndex = 349;
+            this.connectTxt.Text = "Not connected!";
+            // 
+            // connectBtn
+            // 
+            this.connectBtn.Location = new System.Drawing.Point(8, 12);
+            this.connectBtn.Name = "connectBtn";
+            this.connectBtn.Size = new System.Drawing.Size(75, 23);
+            this.connectBtn.TabIndex = 388;
+            this.connectBtn.Text = "Connect";
+            this.connectBtn.UseVisualStyleBackColor = true;
+            this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -119,22 +140,22 @@
             this.label2.TabIndex = 387;
             this.label2.Text = "Checkbox Example";
             // 
-            // TEST
+            // debugCameraCheckBox
             // 
-            this.TEST.AutoSize = true;
-            this.TEST.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.TEST.ForeColor = System.Drawing.Color.DarkOrange;
-            this.TEST.Location = new System.Drawing.Point(8, 80);
-            this.TEST.Name = "TEST";
-            this.TEST.Size = new System.Drawing.Size(99, 15);
-            this.TEST.Style = MetroFramework.MetroColorStyle.Red;
-            this.TEST.TabIndex = 386;
-            this.TEST.Text = "Do Something";
-            this.TEST.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.TEST.UseCustomBackColor = true;
-            this.TEST.UseCustomForeColor = true;
-            this.TEST.UseSelectable = true;
-            this.TEST.CheckedChanged += new System.EventHandler(this.metroCheckBox8_CheckedChanged);
+            this.debugCameraCheckBox.AutoSize = true;
+            this.debugCameraCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.debugCameraCheckBox.ForeColor = System.Drawing.Color.DarkOrange;
+            this.debugCameraCheckBox.Location = new System.Drawing.Point(8, 80);
+            this.debugCameraCheckBox.Name = "debugCameraCheckBox";
+            this.debugCameraCheckBox.Size = new System.Drawing.Size(102, 15);
+            this.debugCameraCheckBox.Style = MetroFramework.MetroColorStyle.Red;
+            this.debugCameraCheckBox.TabIndex = 386;
+            this.debugCameraCheckBox.Text = "Debug Camera";
+            this.debugCameraCheckBox.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.debugCameraCheckBox.UseCustomBackColor = true;
+            this.debugCameraCheckBox.UseCustomForeColor = true;
+            this.debugCameraCheckBox.UseSelectable = true;
+            this.debugCameraCheckBox.CheckedChanged += new System.EventHandler(this.debugCameraCheckBox_CheckedChanged);
             // 
             // PAGE2
             // 
@@ -473,27 +494,6 @@
             this.label10.Text = "Form size: 517, 334";
             this.label10.Visible = false;
             // 
-            // connectBtn
-            // 
-            this.connectBtn.Location = new System.Drawing.Point(8, 12);
-            this.connectBtn.Name = "connectBtn";
-            this.connectBtn.Size = new System.Drawing.Size(75, 23);
-            this.connectBtn.TabIndex = 388;
-            this.connectBtn.Text = "Connect";
-            this.connectBtn.UseVisualStyleBackColor = true;
-            this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
-            // 
-            // connectTxt
-            // 
-            this.connectTxt.AutoSize = true;
-            this.connectTxt.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connectTxt.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.connectTxt.Location = new System.Drawing.Point(89, 16);
-            this.connectTxt.Name = "connectTxt";
-            this.connectTxt.Size = new System.Drawing.Size(131, 19);
-            this.connectTxt.TabIndex = 349;
-            this.connectTxt.Text = "Not connected!";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -542,7 +542,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox13;
-        private MetroFramework.Controls.MetroCheckBox TEST;
+        private MetroFramework.Controls.MetroCheckBox debugCameraCheckBox;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label22;

@@ -12,12 +12,40 @@ namespace Trainer.Classes
         public float X;
         public float Y;
         public float Z;
+        public double Magnitude
+        {
+            get
+            {
+                // returns length as if this was a line which starts at 0, 0, 0
+                return new Line3(Point3.Zero, this).Magnitude;
+            }
+            set { }
+        }
+        public static Point3 Zero = new Point3(0, 0, 0);
 
         public Point3(float x, float y, float z)
         {
             this.X = x;
             this.Y = y;
             this.Z = z;
+        }
+
+        public Point3 Normalize()
+        {
+            float length = (float)this.Magnitude;
+
+            return new Point3(X / length, Y / length, Z / length);
+        }
+
+        // transformation methods
+        public static Point3 operator+ (Point3 a, Point3 b)
+        {
+            return new Point3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+        }
+
+        public static Point3 operator -(Point3 a, Point3 b)
+        {
+            return new Point3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         }
 
         public override bool Equals(object obj)

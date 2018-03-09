@@ -9,6 +9,7 @@ namespace Trainer
         public static Process Process;
         private const double timerInterval = 1000.0d / 60.0d;
         private static Timer timer = new Timer(timerInterval);
+        public static bool DebugCameraEnabled = false;
 
         static MainTrainer()
         {
@@ -18,7 +19,12 @@ namespace Trainer
 
         private static void update(object sender, EventArgs e)
         {
-            throw new Exception();
+            if (Process == null) { return; }
+
+            if (DebugCameraEnabled)
+            {
+
+            }
         }
     }
 }
