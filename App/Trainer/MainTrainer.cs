@@ -42,7 +42,7 @@ namespace Trainer
             }
             else
             {
-                Modules.DebugCamera.Stop();
+                if (Modules.DebugCamera.Enabled) { Modules.DebugCamera.Stop(); }
             }
         }
     }
