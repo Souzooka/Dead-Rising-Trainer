@@ -8,7 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Drawing.Imaging;
 using QuickPoke.Forms;
-using TrainerSpace;
+using Trainer;
 
 
 
@@ -42,7 +42,7 @@ namespace Ascension.Forms.Dialog.Extras
             {
                 process = processes[0];
                 connectTxt.Text = $"Connected to PID {process.Id.ToString("X8")}";
-                Trainer.Process = process;
+                MainTrainer.Process = process;
             }
         }
 
