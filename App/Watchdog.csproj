@@ -163,6 +163,7 @@
     <Compile Include="Trainer\Classes\Point3.cs" />
     <Compile Include="Trainer\Classes\Tests\Line3Tests.cs" />
     <Compile Include="Trainer\MainTrainer.cs" />
+    <Compile Include="Trainer\ReadWriteMemory.cs" />
     <EmbeddedResource Include="Forms\ChangeLog.resx">
       <DependentUpon>ChangeLog.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +190,7 @@
     </Compile>
     <Compile Include="Forms\Properties\UIFileProperty.cs" />
     <Compile Include="Forms\Properties\UIFolderProperty.cs" />
+    <Compile Include="Trainer\Modules\DebugCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\Watchdog 3.0.png" />
@@ -253,9 +255,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Trainer\Modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>

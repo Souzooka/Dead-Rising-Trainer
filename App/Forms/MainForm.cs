@@ -277,14 +277,7 @@ namespace Ascension.Forms.Dialog.Extras
 
         private void debugCameraCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (debugCameraCheckBox.Checked == true)
-            {
-                MessageBox.Show("Shit, you did something.");
-            }
-            else
-            {
-                MessageBox.Show("Still something i guess?");
-            }
+            MainTrainer.DebugCameraEnabled = debugCameraCheckBox.Checked;
         }
 
         private void button5_Click(object sender, EventArgs e)

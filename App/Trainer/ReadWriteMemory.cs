@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.Media;
 using System.Text;
 using System.Threading;
+
+
 namespace ReadWriteMemory
 {
     internal class ProcessMemory
@@ -76,7 +78,7 @@ namespace ReadWriteMemory
 
             foreach (ProcessModule procmodule in modules)
             {
-                if (dllname == procmodule.ModuleName)
+                if (dllname.ToLower() == procmodule.ModuleName.ToLower())
                 {
                     return procmodule.BaseAddress;
                 }
@@ -347,6 +349,11 @@ namespace ReadWriteMemory
             this.WriteMem(IntPtr.Add(this.DllImageAddress(Module), pOffset), BitConverter.GetBytes(pBytes));
         }
 
+        public void WriteMem(string Module, int pOffset, byte[] pBytes)
+        {
+            WriteProcessMemory(this.processHandle, IntPtr.Add(this.DllImageAddress(Module), pOffset), pBytes, pBytes.Length, 0);
+        }
+
         public void WriteMem(IntPtr pOffset, byte[] pBytes)
         {
             WriteProcessMemory(this.processHandle, pOffset, pBytes, pBytes.Length, 0);
@@ -459,10 +466,8 @@ namespace ReadWriteMemory
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         static extern bool CloseHandle(IntPtr handle);
 
-        public static void SuspendProcess(int pid)
+        public void SuspendProcess()
         {
-            var process = Process.GetProcessById(pid);
-
             if (process.ProcessName == string.Empty)
                 return;
 
@@ -481,10 +486,8 @@ namespace ReadWriteMemory
             }
         }
 
-        public static void ResumeProcess(int pid)
+        public void ResumeProcess()
         {
-            var process = Process.GetProcessById(pid);
-
             if (process.ProcessName == string.Empty)
                 return;
 

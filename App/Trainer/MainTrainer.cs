@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Timers;
+using ReadWriteMemory;
 
 namespace Trainer
 {
     public static class MainTrainer
     {
-        public static Process Process;
+        public static Process Process
+        {
+            get
+            {
+                return process;
+            }
+            set
+            {
+                process = value;
+                GameMemory = new ProcessMemory(process);
+            }
+        }
+        private static Process process;
+        private static ProcessMemory GameMemory;
         private const double timerInterval = 1000.0d / 60.0d;
         private static Timer timer = new Timer(timerInterval);
         public static bool DebugCameraEnabled = false;
@@ -23,7 +37,12 @@ namespace Trainer
 
             if (DebugCameraEnabled)
             {
-
+                if (!Modules.DebugCamera.Enabled) { Modules.DebugCamera.Start(process); }
+                Modules.DebugCamera.Update();
+            }
+            else
+            {
+                Modules.DebugCamera.Stop();
             }
         }
     }
