@@ -19,5 +19,16 @@ namespace Trainer.Classes
             this.Y = y;
             this.Z = z;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            Point3 point = (Point3)obj;
+
+            return this.X == point.X && this.Y == point.Y && this.Z == point.Z;
+        }
     }
 }

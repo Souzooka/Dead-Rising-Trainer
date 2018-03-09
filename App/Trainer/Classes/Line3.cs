@@ -35,5 +35,16 @@ namespace Trainer.Classes
             this.Start = start;
             this.End = end;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            Line3 line = (Line3)obj;
+
+            return this.Start.Equals(line.Start) && this.End.Equals(line.End);
+        }
     }
 }
