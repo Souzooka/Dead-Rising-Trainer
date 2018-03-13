@@ -43,12 +43,17 @@ namespace Trainer.Classes
             return new Point3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
         }
 
-        public static Point3 operator -(Point3 a, Point3 b)
+        public static Point3 operator- (Point3 a, Point3 b)
         {
             return new Point3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         }
 
-        public override bool Equals(object obj)
+        public static Point3 operator* (Point3 a, float b)
+        {
+            return new Point3(a.X * b, a.Y * b, a.Z * b);
+    }
+
+    public override bool Equals(object obj)
         {
             if (obj == null || this.GetType() != obj.GetType())
             {

@@ -4,13 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Trainer.ComponentUtil;
+using Trainer.Classes;
 
 namespace Trainer.Modules
 {
     public static class DebugCamera
     {
+        private const float transformModifer = 10.0f;
+
         public static bool Enabled = false;
         private static Process process;
+        private static DeepPointer cameraPtr = new DeepPointer("DeadRising.exe", 0x01CF3648, 0x58, 0x0);
+        
 
         public static void Start(Process pProcess)
         {
@@ -97,7 +102,16 @@ namespace Trainer.Modules
 
         public static void Update()
         {
+            IntPtr camera;
+            cameraPtr.DerefOffsets(process, out camera);
 
+            Point3 cameraPos = process.ReadValue<Point3>(IntPtr.Add(camera, 0x40));
+            Point3 cameraFocalPos = process.ReadValue<Point3>(IntPtr.Add(camera, 0x60));
+            Line3 cameraVector = new Line3(cameraPos, cameraFocalPos);
+            Point3 normalized = cameraVector.Direction.Normalize();
+
+            process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalized * transformModifer));
+            process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalized * transformModifer));
         }
     }	
 }

@@ -46,6 +46,14 @@ namespace Trainer.ComponentUtil
         MEM_IMAGE = 0x1000000
     }
 
+    public enum VirtualKey : int
+    {
+        VK_KEY_A = 0x41,
+        VK_KEY_D = 0x44,
+        VK_KEY_S = 0x53,
+        VK_KEY_W = 0x57
+    }
+
     [Flags]
     public enum MemPageProtect : uint
     {
@@ -161,6 +169,9 @@ namespace Trainer.ComponentUtil
 
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool CloseHandle(IntPtr handle);
+
+        [DllImport("user32.dll")]
+        public static extern short GetKeyState(int key);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct MODULEINFO
