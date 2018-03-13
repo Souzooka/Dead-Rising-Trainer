@@ -10,7 +10,7 @@ namespace Trainer.Modules
 {
     public static class DebugCamera
     {
-        private const float transformModifer = 10.0f;
+        private const float transformModifer = 50.0f;
 
         public static bool Enabled = false;
         private static Process process;
@@ -110,8 +110,11 @@ namespace Trainer.Modules
             Line3 cameraVector = new Line3(cameraPos, cameraFocalPos);
             Point3 normalized = cameraVector.Direction.Normalize();
 
-            process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalized * transformModifer));
-            process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalized * transformModifer));
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_W) & (1 << 15)) != 0)
+            {
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalized * transformModifer));
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalized * transformModifer));
+            }
         }
     }	
 }
