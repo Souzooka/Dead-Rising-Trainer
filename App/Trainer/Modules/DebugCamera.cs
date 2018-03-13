@@ -115,6 +115,36 @@ namespace Trainer.Modules
                 process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalized * transformModifer));
                 process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalized * transformModifer));
             }
+
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_S) & (1 << 15)) != 0)
+            {
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalized * transformModifer * -1));
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalized * transformModifer * -1));
+            }
+
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_A) & (1 << 15)) != 0)
+            {
+                Point3 normalizedCopy = normalized.Clone();
+
+                normalizedCopy.X = normalized.Z;
+                normalizedCopy.Y = 0;
+                normalizedCopy.Z = -normalized.X;
+
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalizedCopy * transformModifer));
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalizedCopy * transformModifer));
+            }
+
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_D) & (1 << 15)) != 0)
+            {
+                Point3 normalizedCopy = normalized.Clone();
+
+                normalizedCopy.X = -normalized.Z;
+                normalizedCopy.Y = 0;
+                normalizedCopy.Z = normalized.X;
+
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalizedCopy * transformModifer));
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalizedCopy * transformModifer));
+            }
         }
     }	
 }
