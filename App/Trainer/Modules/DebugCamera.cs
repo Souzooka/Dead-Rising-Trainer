@@ -11,7 +11,7 @@ namespace Trainer.Modules
     public static class DebugCamera
     {
         private const float transformModifier = 50.0f;
-        private const float rotationModifier = 2.0f;
+        private const float rotationModifier = 3.0f;
 
         public static bool Enabled = false;
         private static Process process;
@@ -118,22 +118,35 @@ namespace Trainer.Modules
             Line3 cameraVector = new Line3(cameraPos, cameraFocalPos);
             Point3 normalized = cameraVector.Direction.Normalize();
             double angleHorizontal = normalized.AngleHorizontal;
+            double angleVertical = normalized.AngleVertical;
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD4) & (1 << 15)) != 0)
             {
-                Point3 normalizedCopy = normalized.Clone();
-                normalizedCopy.X = (float)Math.Sin((angleHorizontal + rotationModifier) * 0.0174533);
-                normalizedCopy.Z = (float)Math.Cos((angleHorizontal + rotationModifier) * 0.0174533);
-                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), (cameraPos + normalizedCopy));
+                normalized.X = (float)Math.Sin((angleHorizontal + rotationModifier) * 0.0174533);
+                normalized.Z = (float)Math.Cos((angleHorizontal + rotationModifier) * 0.0174533);
+                normalized = normalized.Normalize();
+                normalized.Y = (float)Math.Cos(angleVertical * 0.0174533);
             }
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD6) & (1 << 15)) != 0)
             {
-                Point3 normalizedCopy = normalized.Clone();
-                normalizedCopy.X = (float)Math.Sin((angleHorizontal - rotationModifier) * 0.0174533);
-                normalizedCopy.Z = (float)Math.Cos((angleHorizontal - rotationModifier) * 0.0174533);
-                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), (cameraPos + normalizedCopy));
+                normalized.X = (float)Math.Sin((angleHorizontal - rotationModifier) * 0.0174533);
+                normalized.Z = (float)Math.Cos((angleHorizontal - rotationModifier) * 0.0174533);
+                normalized = normalized.Normalize();
+                normalized.Y = (float)Math.Cos(angleVertical * 0.0174533);
             }
+
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD5) & (1 << 15)) != 0)
+            {
+                normalized.Y = (float)Math.Cos((angleVertical + rotationModifier) * 0.0174533);
+            }
+
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD8) & (1 << 15)) != 0)
+            {
+                normalized.Y = (float)Math.Cos((angleVertical - rotationModifier) * 0.0174533);
+            }
+
+            process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), (cameraPos + normalized));
         }
 
         private static void updateTransform()
@@ -148,14 +161,18 @@ namespace Trainer.Modules
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_W) & (1 << 15)) != 0)
             {
-                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalized * transformModifier));
-                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalized * transformModifier));
+                cameraPos += (normalized * transformModifier);
+                cameraFocalPos += (normalized * transformModifier);
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos);
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos);
             }
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_S) & (1 << 15)) != 0)
             {
-                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos + (normalized * transformModifier * -1));
-                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos + (normalized * transformModifier * -1));
+                cameraPos -= (normalized * transformModifier);
+                cameraFocalPos -= (normalized * transformModifier);
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos);
+                process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos);
             }
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_A) & (1 << 15)) != 0)

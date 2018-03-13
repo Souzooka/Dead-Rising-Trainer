@@ -19,6 +19,13 @@ namespace Trainer.Classes
                 return Math.Atan2(this.X, this.Z) * 180 / Math.PI;
             }
         }
+        public double AngleVertical
+        {
+            get
+            {
+                return Math.Acos(Y / Math.Sqrt(X * X + Y * Y + Z * Z)) * 180 / Math.PI;
+            }
+        }
         public double Magnitude
         {
             get
