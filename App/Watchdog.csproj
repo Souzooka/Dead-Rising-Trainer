@@ -162,8 +162,12 @@
     <Compile Include="Trainer\Classes\Line3.cs" />
     <Compile Include="Trainer\Classes\Point3.cs" />
     <Compile Include="Trainer\Classes\Tests\Line3Tests.cs" />
+    <Compile Include="Trainer\ComponentUtil\DeepPointer.cs" />
+    <Compile Include="Trainer\ComponentUtil\MemoryWatcher.cs" />
+    <Compile Include="Trainer\ComponentUtil\ProcessExtensions.cs" />
+    <Compile Include="Trainer\ComponentUtil\SignatureScanner.cs" />
+    <Compile Include="Trainer\ComponentUtil\WinAPI.cs" />
     <Compile Include="Trainer\MainTrainer.cs" />
-    <Compile Include="Trainer\ReadWriteMemory.cs" />
     <EmbeddedResource Include="Forms\ChangeLog.resx">
       <DependentUpon>ChangeLog.cs</DependentUpon>
     </EmbeddedResource>
