@@ -12,6 +12,13 @@ namespace Trainer.Classes
         public float X;
         public float Y;
         public float Z;
+        public double AngleHorizontal
+        {
+            get
+            {
+                return Math.Atan2(this.X, this.Z) * 180 / Math.PI;
+            }
+        }
         public double Magnitude
         {
             get

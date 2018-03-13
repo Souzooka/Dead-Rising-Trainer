@@ -51,7 +51,11 @@ namespace Trainer.ComponentUtil
         VK_KEY_A = 0x41,
         VK_KEY_D = 0x44,
         VK_KEY_S = 0x53,
-        VK_KEY_W = 0x57
+        VK_KEY_W = 0x57,
+        VK_NUMPAD4 = 0x64,
+        VK_NUMPAD5 = 0x65,
+        VK_NUMPAD6 = 0x66,
+        VK_NUMPAD8 = 0x68
     }
 
     [Flags]
@@ -82,6 +86,24 @@ namespace Trainer.ComponentUtil
         SET_THREAD_TOKEN = (0x0080),
         IMPERSONATE = (0x0100),
         DIRECT_IMPERSONATION = (0x0200)
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct LpPoint
+    {
+        public int X;
+        public int Y;
+
+        public LpPoint(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public static LpPoint operator- (LpPoint a, LpPoint b)
+        {
+            return new LpPoint(a.X - b.X, a.Y - b.Y);
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -172,6 +194,9 @@ namespace Trainer.ComponentUtil
 
         [DllImport("user32.dll")]
         public static extern short GetKeyState(int key);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetPhysicalCursorPos(out LpPoint point);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct MODULEINFO
