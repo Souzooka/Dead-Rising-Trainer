@@ -122,28 +122,27 @@ namespace Trainer.Modules
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD4) & (1 << 15)) != 0)
             {
-                normalized.X = (float)Math.Sin((angleHorizontal + rotationModifier) * 0.0174533);
-                normalized.Z = (float)Math.Cos((angleHorizontal + rotationModifier) * 0.0174533);
-                normalized = normalized.Normalize();
-                normalized.Y = (float)Math.Cos(angleVertical * 0.0174533);
+                normalized.AngleHorizontal += rotationModifier;
+                normalized.AngleVertical = angleVertical;
             }
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD6) & (1 << 15)) != 0)
             {
-                normalized.X = (float)Math.Sin((angleHorizontal - rotationModifier) * 0.0174533);
-                normalized.Z = (float)Math.Cos((angleHorizontal - rotationModifier) * 0.0174533);
-                normalized = normalized.Normalize();
-                normalized.Y = (float)Math.Cos(angleVertical * 0.0174533);
+                normalized.AngleHorizontal -= rotationModifier;
+                normalized.AngleVertical = angleVertical;
             }
+            angleHorizontal = normalized.AngleHorizontal;
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD5) & (1 << 15)) != 0)
             {
-                normalized.Y = (float)Math.Cos((angleVertical + rotationModifier) * 0.0174533);
+                normalized.AngleVertical += rotationModifier;
+                normalized.AngleHorizontal = angleHorizontal;
             }
 
             if ((WinAPI.GetKeyState((int)VirtualKey.VK_NUMPAD8) & (1 << 15)) != 0)
             {
-                normalized.Y = (float)Math.Cos((angleVertical - rotationModifier) * 0.0174533);
+                normalized.AngleVertical -= rotationModifier;
+                normalized.AngleHorizontal = angleHorizontal;
             }
 
             process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), (cameraPos + normalized));

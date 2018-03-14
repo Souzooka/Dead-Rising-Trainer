@@ -18,12 +18,30 @@ namespace Trainer.Classes
             {
                 return Math.Atan2(this.X, this.Z) * 180 / Math.PI;
             }
+            set
+            {
+                value *= Math.PI / 180;
+                double magnitude = this.Magnitude;
+
+                this.Z = (float)(magnitude * Math.Sin(this.AngleVertical * Math.PI / 180) * Math.Cos(value));
+                this.X = (float)(magnitude * Math.Sin(this.AngleVertical * Math.PI / 180) * Math.Sin(value));
+                this.Y = (float)(magnitude * Math.Cos(this.AngleVertical * Math.PI / 180));
+            }
         }
         public double AngleVertical
         {
             get
             {
-                return Math.Acos(Y / Math.Sqrt(X * X + Y * Y + Z * Z)) * 180 / Math.PI;
+                return Math.Acos(Y / this.Magnitude) * 180 / Math.PI;
+            }
+            set
+            {
+                value *= Math.PI / 180;
+                double magnitude = this.Magnitude;
+
+                this.Z = (float)(magnitude * Math.Sin(value) * Math.Cos(this.AngleHorizontal * Math.PI / 180));
+                this.X = (float)(magnitude * Math.Sin(value) * Math.Sin(this.AngleHorizontal * Math.PI / 180));
+                this.Y = (float)(magnitude * Math.Cos(value));
             }
         }
         public double Magnitude
