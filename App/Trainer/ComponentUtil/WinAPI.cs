@@ -50,6 +50,8 @@ namespace Trainer.ComponentUtil
     {
         VK_KEY_A = 0x41,
         VK_KEY_D = 0x44,
+        VK_KEY_E = 0x45,
+        VK_KEY_Q = 0x51,
         VK_KEY_S = 0x53,
         VK_KEY_W = 0x57,
         VK_NUMPAD4 = 0x64,

@@ -12,6 +12,7 @@ namespace Trainer.Modules
     {
         private const float transformModifier = 50.0f;
         private const float rotationModifier = 3.0f;
+        private const float fovModifier = 0.5f;
 
         public static bool Enabled = false;
         private static Process process;
@@ -56,6 +57,21 @@ namespace Trainer.Modules
             // Camera focal point write opcode (photo)
             process.WriteBytes(IntPtr.Add(moduleAddr, 0xD37E), new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90 });
 
+            // Camera FOV write opcode (ingame)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xCDB9), new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 });
+
+            // Camera FOV write opcode (photo) (1 of 3)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xD245), new byte[] { 0x90, 0x90, 0x90, 0x90 });
+
+            // Camera FOV write opcode (photo) (2 of 3)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x1283E5), new byte[] { 0x90, 0x90, 0x90, 0x90 });
+
+            // Camera FOV write opcode (photo) (3 of 3)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xCEC8), new byte[] { 0x90, 0x90, 0x90, 0x90 });
+
+            // Camera FOV write opcode (cutscene)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x6E53CB), new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 });
+
             // Resume game execution
             process.ResumeProcess();
         }
@@ -97,6 +113,21 @@ namespace Trainer.Modules
             // Camera focal point write opcode (photo)
             process.WriteBytes(IntPtr.Add(moduleAddr, 0xD37E), new byte[] { 0x41, 0x0F, 0x29, 0x46, 0x60 });
 
+            // Camera FOV write opcode (ingame)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xCDB9), new byte[] { 0xC7, 0x47, 0x34, 0x00, 0x00, 0x5C, 0x42 });
+
+            // Camera FOV write opcode (photo) (1 of 3)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xD245), new byte[] { 0x41, 0x89, 0x46, 0x34 });
+
+            // Camera FOV write opcode (photo) (2 of 3)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x1283E5), new byte[] { 0x41, 0x89, 0x50, 0x34 });
+
+            // Camera FOV write opcode (photo) (3 of 3)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xCEC8), new byte[] { 0x41, 0x89, 0x46, 0x34 });
+
+            // Camera FOV write opcode (cutscene)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x6E53CB), new byte[] { 0xF3, 0x44, 0x0F, 0x11, 0x55, 0x34 });
+
             // Resume game execution
             process.ResumeProcess();
         }
@@ -105,6 +136,26 @@ namespace Trainer.Modules
         {
             updateTransform();
             updateRotation();
+            updateFov();
+        }
+
+        private static void updateFov()
+        {
+            IntPtr camera;
+            cameraPtr.DerefOffsets(process, out camera);
+            float fov = process.ReadValue<float>(IntPtr.Add(camera, 0x34));
+
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_Q) & (1 << 15)) != 0)
+            {
+                fov = Math.Max(fovModifier, fov - fovModifier);
+            }
+
+            if ((WinAPI.GetKeyState((int)VirtualKey.VK_KEY_E) & (1 << 15)) != 0)
+            {
+                fov = Math.Min(180 - fovModifier, fov + fovModifier);
+            }
+
+            process.WriteValue<float>(IntPtr.Add(camera, 0x34), fov);
         }
 
         private static void updateRotation()
@@ -145,6 +196,7 @@ namespace Trainer.Modules
                 normalized.AngleHorizontal = angleHorizontal;
             }
 
+            normalized *= (float)cameraVector.Magnitude;
             process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), (cameraPos + normalized));
         }
 
