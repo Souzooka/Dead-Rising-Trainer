@@ -98,7 +98,7 @@ namespace Trainer.Classes
 
         public Point3 Clone()
         {
-            return (Point3)this.MemberwiseClone();
+            return new Point3(this.X, this.Y, this.Z);
         }
     }
 }

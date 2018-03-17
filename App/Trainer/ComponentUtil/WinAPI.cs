@@ -90,6 +90,7 @@ namespace Trainer.ComponentUtil
         DIRECT_IMPERSONATION = (0x0200)
     }
 
+    // For mouse cursor position (unused)
     [StructLayout(LayoutKind.Sequential)]
     public struct LpPoint
     {
@@ -206,6 +207,14 @@ namespace Trainer.ComponentUtil
             public IntPtr lpBaseOfDll;
             public uint SizeOfImage;
             public IntPtr EntryPoint;
+        }
+    }
+
+    public static class WinAPIExtensionMethods
+    {
+        public static bool IsDown(this VirtualKey vk)
+        {
+            return (WinAPI.GetKeyState((int)vk) & (1 << 15)) != 0;
         }
     }
 }
