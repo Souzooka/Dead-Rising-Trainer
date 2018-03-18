@@ -219,6 +219,7 @@ namespace Trainer.Modules
                 normalizedCopy.X = normalized.Z;
                 normalizedCopy.Y = 0;
                 normalizedCopy.Z = -normalized.X;
+                normalizedCopy = normalizedCopy.Normalize();
 
                 camera.Position += (normalizedCopy * transformMod);
                 camera.FocalPosition += (normalizedCopy * transformMod);
@@ -231,6 +232,7 @@ namespace Trainer.Modules
                 normalizedCopy.X = -normalized.Z;
                 normalizedCopy.Y = 0;
                 normalizedCopy.Z = normalized.X;
+                normalizedCopy = normalizedCopy.Normalize();
 
                 camera.Position += (normalizedCopy * transformMod);
                 camera.FocalPosition += (normalizedCopy * transformMod);
