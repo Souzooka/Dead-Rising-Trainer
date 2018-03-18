@@ -56,6 +56,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.metroTextBox2 = new MetroFramework.Controls.MetroTextBox();
             this.MainTabControl.SuspendLayout();
             this.PAGE1.SuspendLayout();
             this.PAGE2.SuspendLayout();
@@ -86,6 +87,7 @@
             // PAGE1
             // 
             this.PAGE1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.PAGE1.Controls.Add(this.metroTextBox2);
             this.PAGE1.Controls.Add(this.connectTxt);
             this.PAGE1.Controls.Add(this.connectBtn);
             this.PAGE1.Controls.Add(this.label2);
@@ -494,6 +496,39 @@
             this.label10.Text = "Form size: 517, 334";
             this.label10.Visible = false;
             // 
+            // metroTextBox2
+            // 
+            // 
+            // 
+            // 
+            this.metroTextBox2.CustomButton.Image = null;
+            this.metroTextBox2.CustomButton.Location = new System.Drawing.Point(286, 1);
+            this.metroTextBox2.CustomButton.Name = "";
+            this.metroTextBox2.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.metroTextBox2.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTextBox2.CustomButton.TabIndex = 1;
+            this.metroTextBox2.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTextBox2.CustomButton.UseSelectable = true;
+            this.metroTextBox2.CustomButton.Visible = false;
+            this.metroTextBox2.Lines = new string[] {
+        "If this didn\'t work i swear to fuck."};
+            this.metroTextBox2.Location = new System.Drawing.Point(117, 169);
+            this.metroTextBox2.MaxLength = 32767;
+            this.metroTextBox2.Name = "metroTextBox2";
+            this.metroTextBox2.PasswordChar = '\0';
+            this.metroTextBox2.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.metroTextBox2.SelectedText = "";
+            this.metroTextBox2.SelectionLength = 0;
+            this.metroTextBox2.SelectionStart = 0;
+            this.metroTextBox2.Size = new System.Drawing.Size(308, 23);
+            this.metroTextBox2.Style = MetroFramework.MetroColorStyle.Orange;
+            this.metroTextBox2.TabIndex = 389;
+            this.metroTextBox2.Text = "If this didn\'t work i swear to fuck.";
+            this.metroTextBox2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroTextBox2.UseSelectable = true;
+            this.metroTextBox2.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.metroTextBox2.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,5 +589,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.Label connectTxt;
+        private MetroFramework.Controls.MetroTextBox metroTextBox2;
     }
 }
