@@ -80,6 +80,15 @@ namespace Trainer.Modules
             // Camera FOV write opcode (cutscene)
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x6E53CB), new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 });
 
+            // Camera FOV write opcode (helicopter photo cutscene)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xBFC3), new byte[] { 0x90, 0x90, 0x90 });
+
+            // Camera Tilt write opcode (ingame)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xDFBB3), new byte[] { 0x90, 0x90, 0x90, 0x90 });
+
+            // Camera Tilt write opcode (cutscene)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x6E54A2), new byte[] { 0x90, 0x90, 0x90, 0x90 });
+
             // Resume game execution
             process.ResumeProcess();
         }
@@ -136,6 +145,15 @@ namespace Trainer.Modules
             // Camera FOV write opcode (cutscene)
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x6E53CB), new byte[] { 0xF3, 0x44, 0x0F, 0x11, 0x55, 0x34 });
 
+            // Camera FOV write opcode (helicopter photo cutscene)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xBFC3), new byte[] { 0x89, 0x46, 0x34 });
+
+            // Camera Tilt write opcode (ingame)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0xDFBB3), new byte[] { 0x0F, 0x29, 0x53, 0x50 });
+
+            // Camera Tilt write opcode (cutscene)
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x6E54A2), new byte[] { 0x0F, 0x29, 0x4D, 0x50 });
+
             // Resume game execution
             process.ResumeProcess();
         }
@@ -166,6 +184,7 @@ namespace Trainer.Modules
             updateTransform();
             updateRotation();
             updateFov();
+            updateTilt();
 
             process.WriteValue<Camera>(cameraPtr, camera);
         }
@@ -201,18 +220,21 @@ namespace Trainer.Modules
         private static void updateTransform()
         {
             Point3 normalized = (camera.FocalPosition - camera.Position).Normalize();
+            // Forward movement
             if (VirtualKey.VK_KEY_W.IsDown())
             {
                 camera.Position += (normalized * transformMod);
                 camera.FocalPosition += (normalized * transformMod);
             }
 
+            // Backwards movement
             if (VirtualKey.VK_KEY_S.IsDown())
             {
                 camera.Position -= (normalized * transformMod);
                 camera.FocalPosition -= (normalized * transformMod);
             }
 
+            // Sideways movements
             if (VirtualKey.VK_KEY_A.IsDown())
             {
                 Point3 normalizedCopy = normalized.Clone();
@@ -238,6 +260,27 @@ namespace Trainer.Modules
                 camera.Position += (normalizedCopy * transformMod);
                 camera.FocalPosition += (normalizedCopy * transformMod);
             }
+
+            // Vertical movements
+            if (VirtualKey.VK_KEY_R.IsDown())
+            {
+                camera.Position += new Point3(0, 1, 0) * transformMod;
+                camera.FocalPosition += new Point3(0, 1, 0) * transformMod;
+            }
+
+            if (VirtualKey.VK_KEY_F.IsDown())
+            {
+                camera.Position -= new Point3(0, 1, 0) * transformMod;
+                camera.FocalPosition -= new Point3(0, 1, 0) * transformMod;
+            }
+        }
+
+        private static void updateTilt()
+        {
+            // Flatten tilt
+            camera.TiltX = 0;
+            camera.TiltY = 1;
+            camera.TiltZ = 0;
         }
     }	
 }
