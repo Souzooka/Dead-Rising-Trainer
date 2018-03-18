@@ -21,9 +21,9 @@ namespace Trainer.Modules
         private static float fovMod;
 
         public static bool Enabled = false;
-        private static Process process;
-        private static DeepPointer cameraDeepPtr = new DeepPointer("DeadRising.exe", 0x01CF3648, 0x58, 0x0);
+        public static DeepPointer CameraDeepPtr = new DeepPointer("DeadRising.exe", 0x01CF3648, 0x58, 0x0);
         private static IntPtr cameraPtr;
+        private static Process process;
         private static Camera camera;
         
 
@@ -160,7 +160,7 @@ namespace Trainer.Modules
 
         public static void Update()
         {
-            cameraDeepPtr.DerefOffsets(process, out cameraPtr);
+            CameraDeepPtr.DerefOffsets(process, out cameraPtr);
             process.ReadValue<Camera>(cameraPtr, out camera);
 
             transformMod = transformModifier;

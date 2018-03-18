@@ -268,6 +268,11 @@ namespace Ascension.Forms.Dialog.Extras
             MainTrainer.DebugCameraEnabled = debugCameraCheckBox.Checked;
         }
 
+        private void noclipCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            MainTrainer.NoclipEnabled = noclipCheckBox.Checked;
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
             MainTabControl.Controls.Remove(TOOL_DEBUG);
