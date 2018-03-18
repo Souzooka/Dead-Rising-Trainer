@@ -49,7 +49,7 @@ namespace Trainer.Classes
             get
             {
                 // returns length as if this was a line which starts at 0, 0, 0
-                return new Line3(Point3.Zero, this).Magnitude;
+                return Math.Sqrt(X * X + Y * Y + Z * Z);
             }
             set { }
         }
@@ -82,6 +82,12 @@ namespace Trainer.Classes
 
         public static Point3 operator* (Point3 a, float b)
         {
+            return new Point3(a.X * b, a.Y * b, a.Z * b);
+        }
+
+        public static Point3 operator* (Point3 a, double pb)
+        {
+            float b = (float)pb;
             return new Point3(a.X * b, a.Y * b, a.Z * b);
         }
 

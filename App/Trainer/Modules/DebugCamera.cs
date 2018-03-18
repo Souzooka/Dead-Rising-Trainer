@@ -194,6 +194,7 @@ namespace Trainer.Modules
             if (VirtualKey.VK_NUMPAD8.IsDown()) { normalized.AngleVertical -= rotationMod; }
             normalized.AngleHorizontal = angleHorizontal;
 
+            normalized *= (camera.FocalPosition - camera.Position).Magnitude;
             camera.FocalPosition = camera.Position + normalized;
         }
 
