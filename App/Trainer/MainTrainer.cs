@@ -20,6 +20,11 @@ namespace Trainer
         private static void update(object sender, EventArgs e)
         {
             if (Process == null) { return; }
+            if (Process.HasExited)
+            {
+                // TODO: Update UI to show connection state
+                return;
+            }
 
             if (DebugCameraEnabled)
             {
