@@ -31,19 +31,7 @@ namespace Ascension.Forms.Dialog.Extras
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
-            var processes = Process.GetProcessesByName("DeadRising");
-            Process process;
-
-            if (processes.Length == 0)
-            {
-                connectTxt.Text = "Not connected!";
-            }
-            else
-            {
-                process = processes[0];
-                connectTxt.Text = $"Connected to PID {process.Id.ToString("X8")}";
-                MainTrainer.Process = process;
-            }
+           //delete
         }
 
         //close program code KEEP
@@ -298,6 +286,43 @@ namespace Ascension.Forms.Dialog.Extras
         private void button4_Click(object sender, EventArgs e)
         {
             MainTabControl.SelectedTab = PAGE2; //KEEP
+        }
+
+        private void connect_Click(object sender, EventArgs e)
+        {
+            var processes = Process.GetProcessesByName("DeadRising");
+            Process process;
+
+            if (processes.Length == 0)
+            {
+                connectTxt.Text = "No Connection . . .";
+            }
+            else
+            {
+                process = processes[0];
+                connectTxt.Text = $"Connected to PID {process.Id.ToString("X8")}";
+                MainTrainer.Process = process;
+            }
+        }
+
+        private void connectTxt_MouseDown(object sender, MouseEventArgs e)
+        {
+            _dragging = true;  // _dragging is your variable flag
+            _start_point = new Point(e.X, e.Y);
+        }
+
+        private void connectTxt_MouseUp(object sender, MouseEventArgs e)
+        {
+            _dragging = false;//keep
+        }
+
+        private void connectTxt_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_dragging)
+            {
+                Point p = PointToScreen(e.Location);
+                Location = new Point(p.X - this._start_point.X, p.Y - this._start_point.Y); //keep
+            }
         }
     }
 }

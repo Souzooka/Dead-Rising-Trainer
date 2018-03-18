@@ -32,8 +32,6 @@
             this.MainTabControl = new MetroFramework.Controls.MetroTabControl();
             this.PAGE1 = new MetroFramework.Controls.MetroTabPage();
             this.connectTxt = new System.Windows.Forms.Label();
-            this.connectBtn = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.debugCameraCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.PAGE2 = new MetroFramework.Controls.MetroTabPage();
             this.button3 = new System.Windows.Forms.Button();
@@ -56,6 +54,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.connect = new MetroFramework.Controls.MetroButton();
+            this.metroCheckBox1 = new MetroFramework.Controls.MetroCheckBox();
+            this.metroCheckBox2 = new MetroFramework.Controls.MetroCheckBox();
+            this.metroCheckBox3 = new MetroFramework.Controls.MetroCheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.MainTabControl.SuspendLayout();
             this.PAGE1.SuspendLayout();
             this.PAGE2.SuspendLayout();
@@ -86,9 +90,10 @@
             // PAGE1
             // 
             this.PAGE1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.PAGE1.Controls.Add(this.connectTxt);
-            this.PAGE1.Controls.Add(this.connectBtn);
             this.PAGE1.Controls.Add(this.label2);
+            this.PAGE1.Controls.Add(this.metroCheckBox3);
+            this.PAGE1.Controls.Add(this.metroCheckBox2);
+            this.PAGE1.Controls.Add(this.metroCheckBox1);
             this.PAGE1.Controls.Add(this.debugCameraCheckBox);
             this.PAGE1.HorizontalScrollbarBarColor = true;
             this.PAGE1.HorizontalScrollbarHighlightOnWheel = false;
@@ -97,7 +102,7 @@
             this.PAGE1.Name = "PAGE1";
             this.PAGE1.Size = new System.Drawing.Size(509, 281);
             this.PAGE1.TabIndex = 6;
-            this.PAGE1.Text = "PAGE1 /";
+            this.PAGE1.Text = "Functions /";
             this.PAGE1.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.PAGE1.UseCustomBackColor = true;
             this.PAGE1.UseCustomForeColor = true;
@@ -110,42 +115,23 @@
             // connectTxt
             // 
             this.connectTxt.AutoSize = true;
-            this.connectTxt.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.connectTxt.Font = new System.Drawing.Font("Lucida Sans Unicode", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.connectTxt.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.connectTxt.Location = new System.Drawing.Point(89, 16);
+            this.connectTxt.Location = new System.Drawing.Point(75, 6);
             this.connectTxt.Name = "connectTxt";
-            this.connectTxt.Size = new System.Drawing.Size(131, 19);
+            this.connectTxt.Size = new System.Drawing.Size(134, 16);
             this.connectTxt.TabIndex = 349;
-            this.connectTxt.Text = "Not connected!";
-            // 
-            // connectBtn
-            // 
-            this.connectBtn.Location = new System.Drawing.Point(8, 12);
-            this.connectBtn.Name = "connectBtn";
-            this.connectBtn.Size = new System.Drawing.Size(75, 23);
-            this.connectBtn.TabIndex = 388;
-            this.connectBtn.Text = "Connect";
-            this.connectBtn.UseVisualStyleBackColor = true;
-            this.connectBtn.Click += new System.EventHandler(this.connectBtn_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.Location = new System.Drawing.Point(113, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(163, 19);
-            this.label2.TabIndex = 387;
-            this.label2.Text = "Checkbox Example";
+            this.connectTxt.Text = "No Connection . . .";
+            this.connectTxt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.connectTxt_MouseDown);
+            this.connectTxt.MouseMove += new System.Windows.Forms.MouseEventHandler(this.connectTxt_MouseMove);
+            this.connectTxt.MouseUp += new System.Windows.Forms.MouseEventHandler(this.connectTxt_MouseUp);
             // 
             // debugCameraCheckBox
             // 
             this.debugCameraCheckBox.AutoSize = true;
-            this.debugCameraCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.debugCameraCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.debugCameraCheckBox.ForeColor = System.Drawing.Color.DarkOrange;
-            this.debugCameraCheckBox.Location = new System.Drawing.Point(8, 80);
+            this.debugCameraCheckBox.Location = new System.Drawing.Point(8, 15);
             this.debugCameraCheckBox.Name = "debugCameraCheckBox";
             this.debugCameraCheckBox.Size = new System.Drawing.Size(102, 15);
             this.debugCameraCheckBox.Style = MetroFramework.MetroColorStyle.Red;
@@ -159,6 +145,7 @@
             // 
             // PAGE2
             // 
+            this.PAGE2.Controls.Add(this.label3);
             this.PAGE2.Controls.Add(this.button3);
             this.PAGE2.Controls.Add(this.metroTextBox1);
             this.PAGE2.Controls.Add(this.label1);
@@ -173,7 +160,7 @@
             this.PAGE2.Name = "PAGE2";
             this.PAGE2.Size = new System.Drawing.Size(509, 281);
             this.PAGE2.TabIndex = 2;
-            this.PAGE2.Text = "PAGE2 /";
+            this.PAGE2.Text = "Test /";
             this.PAGE2.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.PAGE2.VerticalScrollbarBarColor = true;
             this.PAGE2.VerticalScrollbarHighlightOnWheel = false;
@@ -228,7 +215,7 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
@@ -286,7 +273,7 @@
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
@@ -310,7 +297,7 @@
             this.TOOL_DEBUG.Size = new System.Drawing.Size(509, 281);
             this.TOOL_DEBUG.Style = MetroFramework.MetroColorStyle.Red;
             this.TOOL_DEBUG.TabIndex = 8;
-            this.TOOL_DEBUG.Text = "TESTING /";
+            this.TOOL_DEBUG.Text = "Test /";
             this.TOOL_DEBUG.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.TOOL_DEBUG.VerticalScrollbarBarColor = true;
             this.TOOL_DEBUG.VerticalScrollbarHighlightOnWheel = false;
@@ -422,13 +409,13 @@
             // 
             this.versionTxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.versionTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.versionTxt.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.versionTxt.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versionTxt.ForeColor = System.Drawing.Color.Silver;
-            this.versionTxt.Location = new System.Drawing.Point(427, 26);
+            this.versionTxt.Location = new System.Drawing.Point(417, 26);
             this.versionTxt.Name = "versionTxt";
-            this.versionTxt.Size = new System.Drawing.Size(87, 15);
+            this.versionTxt.Size = new System.Drawing.Size(97, 15);
             this.versionTxt.TabIndex = 310;
-            this.versionTxt.Text = "Version 0.0.0";
+            this.versionTxt.Text = "Version 0.0.1";
             this.versionTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.versionTxt.Click += new System.EventHandler(this.label8_Click);
             this.versionTxt.MouseLeave += new System.EventHandler(this.label8_MouseLeave);
@@ -437,7 +424,9 @@
             // mousedrag
             // 
             this.mousedrag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.mousedrag.Controls.Add(this.connect);
             this.mousedrag.Controls.Add(this.label6);
+            this.mousedrag.Controls.Add(this.connectTxt);
             this.mousedrag.Controls.Add(this.label7);
             this.mousedrag.Location = new System.Drawing.Point(-5, -3);
             this.mousedrag.Name = "mousedrag";
@@ -494,6 +483,95 @@
             this.label10.Text = "Form size: 517, 334";
             this.label10.Visible = false;
             // 
+            // connect
+            // 
+            this.connect.Location = new System.Drawing.Point(9, 5);
+            this.connect.Name = "connect";
+            this.connect.Size = new System.Drawing.Size(60, 19);
+            this.connect.Style = MetroFramework.MetroColorStyle.Orange;
+            this.connect.TabIndex = 389;
+            this.connect.Text = "Connect";
+            this.connect.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.connect.UseSelectable = true;
+            this.connect.Click += new System.EventHandler(this.connect_Click);
+            // 
+            // metroCheckBox1
+            // 
+            this.metroCheckBox1.AutoSize = true;
+            this.metroCheckBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.metroCheckBox1.Enabled = false;
+            this.metroCheckBox1.ForeColor = System.Drawing.Color.Silver;
+            this.metroCheckBox1.Location = new System.Drawing.Point(8, 36);
+            this.metroCheckBox1.Name = "metroCheckBox1";
+            this.metroCheckBox1.Size = new System.Drawing.Size(125, 15);
+            this.metroCheckBox1.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroCheckBox1.TabIndex = 387;
+            this.metroCheckBox1.Text = "(Not implemented)";
+            this.metroCheckBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroCheckBox1.UseCustomBackColor = true;
+            this.metroCheckBox1.UseCustomForeColor = true;
+            this.metroCheckBox1.UseSelectable = true;
+            // 
+            // metroCheckBox2
+            // 
+            this.metroCheckBox2.AutoSize = true;
+            this.metroCheckBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.metroCheckBox2.Enabled = false;
+            this.metroCheckBox2.ForeColor = System.Drawing.Color.Silver;
+            this.metroCheckBox2.Location = new System.Drawing.Point(8, 57);
+            this.metroCheckBox2.Name = "metroCheckBox2";
+            this.metroCheckBox2.Size = new System.Drawing.Size(125, 15);
+            this.metroCheckBox2.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroCheckBox2.TabIndex = 388;
+            this.metroCheckBox2.Text = "(Not implemented)";
+            this.metroCheckBox2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroCheckBox2.UseCustomBackColor = true;
+            this.metroCheckBox2.UseCustomForeColor = true;
+            this.metroCheckBox2.UseSelectable = true;
+            // 
+            // metroCheckBox3
+            // 
+            this.metroCheckBox3.AutoSize = true;
+            this.metroCheckBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.metroCheckBox3.Enabled = false;
+            this.metroCheckBox3.ForeColor = System.Drawing.Color.Silver;
+            this.metroCheckBox3.Location = new System.Drawing.Point(8, 78);
+            this.metroCheckBox3.Name = "metroCheckBox3";
+            this.metroCheckBox3.Size = new System.Drawing.Size(125, 15);
+            this.metroCheckBox3.Style = MetroFramework.MetroColorStyle.Red;
+            this.metroCheckBox3.TabIndex = 389;
+            this.metroCheckBox3.Text = "(Not implemented)";
+            this.metroCheckBox3.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroCheckBox3.UseCustomBackColor = true;
+            this.metroCheckBox3.UseCustomForeColor = true;
+            this.metroCheckBox3.UseSelectable = true;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label2.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Gray;
+            this.label2.Location = new System.Drawing.Point(149, 242);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(220, 34);
+            this.label2.TabIndex = 349;
+            this.label2.Text = "[ UNDER CONSTRUCTION ]";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label3.Font = new System.Drawing.Font("Lucida Sans Unicode", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Gray;
+            this.label3.Location = new System.Drawing.Point(149, 242);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(220, 34);
+            this.label3.TabIndex = 382;
+            this.label3.Text = "[ UNDER CONSTRUCTION ]";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,6 +599,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.mousedrag.ResumeLayout(false);
+            this.mousedrag.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -546,13 +625,17 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button3;
         private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.Label connectTxt;
+        private MetroFramework.Controls.MetroButton connect;
+        private System.Windows.Forms.Label label2;
+        private MetroFramework.Controls.MetroCheckBox metroCheckBox3;
+        private MetroFramework.Controls.MetroCheckBox metroCheckBox2;
+        private MetroFramework.Controls.MetroCheckBox metroCheckBox1;
+        private System.Windows.Forms.Label label3;
     }
 }
