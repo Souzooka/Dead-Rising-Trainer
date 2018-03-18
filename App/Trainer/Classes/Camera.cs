@@ -20,7 +20,7 @@ namespace Trainer.Classes
         private float e; // 0x20
         private Unknown4 f; // 0x24
         public float FarClip; // 0x28 (distance to render)
-        private float NearClip; // 0x2C (distance to start rendering)
+        public float NearClip; // 0x2C (distance to start rendering)
         private float i; // 0x30
         public float Fov; // 0x34
         private Unknown8 k; // 0x38
@@ -39,7 +39,7 @@ namespace Trainer.Classes
         private Unknown16 t; // 0xB0
         private Unknown16 u; // 0xC0
         private Unknown16 w; // 0xD0
-        public Point3 Normalized; // 0xE0
+        public Point3 Normalized; // 0xE0 (Note: Is 0,0,0 in cutscene tracks :()
         private Unknown4 x; //0xEC
         private Unknown4 y; //0xF0
         private float z; // 0xF4
@@ -56,7 +56,7 @@ namespace Trainer.Classes
         private float /* ?? */ ak; // 0x128
         private float /* ?? */ al; // 0x12C
         private Unknown8 am; // 0x130
-        public float Magnitude; // 0x138
+        public float Magnitude; // 0x138 (Note: Is 0 in cutscene tracks :()
         private Unknown4 ao; // 0x13C
         private IntPtr /* ?? */ ap; // 0x140
         private Unknown8 aq; // 0x148

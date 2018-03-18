@@ -179,45 +179,46 @@ namespace Trainer.Modules
 
         private static void updateRotation()
         {
-            double angleHorizontal = camera.Normalized.AngleHorizontal;
-            double angleVertical = camera.Normalized.AngleVertical;
+            Point3 normalized = (camera.FocalPosition - camera.Position).Normalize();
+            double angleHorizontal = normalized.AngleHorizontal;
+            double angleVertical = normalized.AngleVertical;
 
             // Horizontal rotations
-            if (VirtualKey.VK_NUMPAD4.IsDown()) { camera.Normalized.AngleHorizontal += rotationMod; }
-            if (VirtualKey.VK_NUMPAD6.IsDown()) { camera.Normalized.AngleHorizontal -= rotationMod; }
-            camera.Normalized.AngleVertical = angleVertical;
-            angleHorizontal = camera.Normalized.AngleHorizontal;
+            if (VirtualKey.VK_NUMPAD4.IsDown()) { normalized.AngleHorizontal += rotationMod; }
+            if (VirtualKey.VK_NUMPAD6.IsDown()) { normalized.AngleHorizontal -= rotationMod; }
+            normalized.AngleVertical = angleVertical;
+            angleHorizontal = normalized.AngleHorizontal;
 
             // Vertical rotations
-            if (VirtualKey.VK_NUMPAD5.IsDown()) { camera.Normalized.AngleVertical += rotationMod; }
-            if (VirtualKey.VK_NUMPAD8.IsDown()) { camera.Normalized.AngleVertical -= rotationMod; }
-            camera.Normalized.AngleHorizontal = angleHorizontal;
+            if (VirtualKey.VK_NUMPAD5.IsDown()) { normalized.AngleVertical += rotationMod; }
+            if (VirtualKey.VK_NUMPAD8.IsDown()) { normalized.AngleVertical -= rotationMod; }
+            normalized.AngleHorizontal = angleHorizontal;
 
-            // Restore camera magnitude
-            camera.FocalPosition = (camera.Normalized * camera.Magnitude) + camera.Position;
+            camera.FocalPosition = camera.Position + normalized;
         }
 
         private static void updateTransform()
         {
+            Point3 normalized = (camera.FocalPosition - camera.Position).Normalize();
             if (VirtualKey.VK_KEY_W.IsDown())
             {
-                camera.Position += (camera.Normalized * transformMod);
-                camera.FocalPosition += (camera.Normalized * transformMod);
+                camera.Position += (normalized * transformMod);
+                camera.FocalPosition += (normalized * transformMod);
             }
 
             if (VirtualKey.VK_KEY_S.IsDown())
             {
-                camera.Position -= (camera.Normalized * transformMod);
-                camera.FocalPosition -= (camera.Normalized * transformMod);
+                camera.Position -= (normalized * transformMod);
+                camera.FocalPosition -= (normalized * transformMod);
             }
 
             if (VirtualKey.VK_KEY_A.IsDown())
             {
-                Point3 normalizedCopy = camera.Normalized.Clone();
+                Point3 normalizedCopy = normalized.Clone();
 
-                normalizedCopy.X = camera.Normalized.Z;
+                normalizedCopy.X = normalized.Z;
                 normalizedCopy.Y = 0;
-                normalizedCopy.Z = -camera.Normalized.X;
+                normalizedCopy.Z = -normalized.X;
 
                 camera.Position += (normalizedCopy * transformMod);
                 camera.FocalPosition += (normalizedCopy * transformMod);
@@ -225,11 +226,11 @@ namespace Trainer.Modules
 
             if (VirtualKey.VK_KEY_D.IsDown())
             {
-                Point3 normalizedCopy = camera.Normalized.Clone();
+                Point3 normalizedCopy = normalized.Clone();
 
-                normalizedCopy.X = -camera.Normalized.Z;
+                normalizedCopy.X = -normalized.Z;
                 normalizedCopy.Y = 0;
-                normalizedCopy.Z = camera.Normalized.X;
+                normalizedCopy.Z = normalized.X;
 
                 camera.Position += (normalizedCopy * transformMod);
                 camera.FocalPosition += (normalizedCopy * transformMod);
