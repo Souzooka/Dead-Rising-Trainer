@@ -111,7 +111,7 @@
             this.textBox1.ShortcutsEnabled = false;
             this.textBox1.Size = new System.Drawing.Size(525, 134);
             this.textBox1.TabIndex = 357;
-            this.textBox1.Text = "> ADD A NOTE";
+            this.textBox1.Text = "> UI Changes (Finally)";
             this.textBox1.WordWrap = false;
             // 
             // label3
