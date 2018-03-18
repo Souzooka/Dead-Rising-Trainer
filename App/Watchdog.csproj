@@ -148,7 +148,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Trainer\Classes\Camera.cs" />
     <Compile Include="Trainer\Classes\Line3.cs" />
+    <Compile Include="Trainer\Classes\Padding\Unknown.cs" />
     <Compile Include="Trainer\Classes\Point3.cs" />
     <Compile Include="Trainer\Classes\Tests\Line3Tests.cs" />
     <Compile Include="Trainer\ComponentUtil\DeepPointer.cs" />

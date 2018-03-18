@@ -13,6 +13,7 @@ namespace Trainer.Modules
         private const float transformModifier = 50.0f;
         private const float rotationModifier = 3.0f;
         private const float fovModifier = 0.5f;
+        private const float keyModifier = 5.0f;
 
         // variables for key modifiers
         private static float transformMod;
@@ -21,7 +22,9 @@ namespace Trainer.Modules
 
         public static bool Enabled = false;
         private static Process process;
-        private static DeepPointer cameraPtr = new DeepPointer("DeadRising.exe", 0x01CF3648, 0x58, 0x0);
+        private static DeepPointer cameraDeepPtr = new DeepPointer("DeadRising.exe", 0x01CF3648, 0x58, 0x0);
+        private static IntPtr cameraPtr;
+        private static Camera camera;
         
 
         public static void Start(Process pProcess)
@@ -139,105 +142,98 @@ namespace Trainer.Modules
 
         public static void Update()
         {
+            cameraDeepPtr.DerefOffsets(process, out cameraPtr);
+            process.ReadValue<Camera>(cameraPtr, out camera);
+
             transformMod = transformModifier;
             rotationMod = rotationModifier;
             fovMod = fovModifier;
 
+            if (VirtualKey.VK_LMENU.IsDown())
+            {
+                transformMod *= keyModifier;
+                rotationMod *= keyModifier;
+                fovMod *= keyModifier;
+            }
+
+            if (VirtualKey.VK_LCONTROL.IsDown())
+            {
+                transformMod /= keyModifier;
+                rotationMod /= keyModifier;
+                fovMod /= keyModifier;
+            }
+
             updateTransform();
             updateRotation();
             updateFov();
+
+            process.WriteValue<Camera>(cameraPtr, camera);
         }
 
         private static void updateFov()
         {
-            IntPtr camera;
-            cameraPtr.DerefOffsets(process, out camera);
-            float fov = process.ReadValue<float>(IntPtr.Add(camera, 0x34));
-
             // Change FOV
-            if (VirtualKey.VK_KEY_Q.IsDown()) { fov = Math.Max(fovModifier, fov - fovMod); }
-            if (VirtualKey.VK_KEY_E.IsDown()) { fov = Math.Min(180 - fovModifier, fov + fovMod); }
-
-            process.WriteValue<float>(IntPtr.Add(camera, 0x34), fov);
+            if (VirtualKey.VK_KEY_Q.IsDown()) { camera.Fov = Math.Max(fovModifier, camera.Fov - fovMod); }
+            if (VirtualKey.VK_KEY_E.IsDown()) { camera.Fov = Math.Min(180 - fovModifier, camera.Fov + fovMod); }
         }
 
         private static void updateRotation()
         {
-            IntPtr camera;
-            cameraPtr.DerefOffsets(process, out camera);
-
-            Point3 cameraPos = process.ReadValue<Point3>(IntPtr.Add(camera, 0x40));
-            Point3 cameraFocalPos = process.ReadValue<Point3>(IntPtr.Add(camera, 0x60));
-            Point3 delta = cameraPos - cameraFocalPos;
-            Line3 cameraVector = new Line3(cameraPos, cameraFocalPos);
-            Point3 normalized = cameraVector.Direction.Normalize();
-            double angleHorizontal = normalized.AngleHorizontal;
-            double angleVertical = normalized.AngleVertical;
+            double angleHorizontal = camera.Normalized.AngleHorizontal;
+            double angleVertical = camera.Normalized.AngleVertical;
 
             // Horizontal rotations
-            if (VirtualKey.VK_NUMPAD4.IsDown()) { normalized.AngleHorizontal += rotationModifier; }
-            if (VirtualKey.VK_NUMPAD6.IsDown()) { normalized.AngleHorizontal -= rotationModifier; }
-            normalized.AngleVertical = angleVertical;
-            angleHorizontal = normalized.AngleHorizontal;
+            if (VirtualKey.VK_NUMPAD4.IsDown()) { camera.Normalized.AngleHorizontal += rotationMod; }
+            if (VirtualKey.VK_NUMPAD6.IsDown()) { camera.Normalized.AngleHorizontal -= rotationMod; }
+            camera.Normalized.AngleVertical = angleVertical;
+            angleHorizontal = camera.Normalized.AngleHorizontal;
 
             // Vertical rotations
-            if (VirtualKey.VK_NUMPAD5.IsDown()) { normalized.AngleVertical += rotationModifier; }
-            if (VirtualKey.VK_NUMPAD8.IsDown()) { normalized.AngleVertical -= rotationModifier; }
-            normalized.AngleHorizontal = angleHorizontal;
+            if (VirtualKey.VK_NUMPAD5.IsDown()) { camera.Normalized.AngleVertical += rotationMod; }
+            if (VirtualKey.VK_NUMPAD8.IsDown()) { camera.Normalized.AngleVertical -= rotationMod; }
+            camera.Normalized.AngleHorizontal = angleHorizontal;
 
-            // Restore camera magnitude and write to memory
-            normalized *= (float)cameraVector.Magnitude;
-            process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), (cameraPos + normalized));
+            // Restore camera magnitude
+            camera.FocalPosition = (camera.Normalized * camera.Magnitude) + camera.Position;
         }
 
         private static void updateTransform()
         {
-            IntPtr camera;
-            cameraPtr.DerefOffsets(process, out camera);
-
-            Point3 cameraPos = process.ReadValue<Point3>(IntPtr.Add(camera, 0x40));
-            Point3 cameraFocalPos = process.ReadValue<Point3>(IntPtr.Add(camera, 0x60));
-            Line3 cameraVector = new Line3(cameraPos, cameraFocalPos);
-            Point3 normalized = cameraVector.Direction.Normalize();
-
             if (VirtualKey.VK_KEY_W.IsDown())
             {
-                cameraPos += (normalized * transformModifier);
-                cameraFocalPos += (normalized * transformModifier);
+                camera.Position += (camera.Normalized * transformMod);
+                camera.FocalPosition += (camera.Normalized * transformMod);
             }
 
             if (VirtualKey.VK_KEY_S.IsDown())
             {
-                cameraPos -= (normalized * transformModifier);
-                cameraFocalPos -= (normalized * transformModifier);
+                camera.Position -= (camera.Normalized * transformMod);
+                camera.FocalPosition -= (camera.Normalized * transformMod);
             }
 
             if (VirtualKey.VK_KEY_A.IsDown())
             {
-                Point3 normalizedCopy = normalized.Clone();
+                Point3 normalizedCopy = camera.Normalized.Clone();
 
-                normalizedCopy.X = normalized.Z;
+                normalizedCopy.X = camera.Normalized.Z;
                 normalizedCopy.Y = 0;
-                normalizedCopy.Z = -normalized.X;
+                normalizedCopy.Z = -camera.Normalized.X;
 
-                cameraPos += (normalizedCopy * transformModifier);
-                cameraFocalPos += (normalizedCopy * transformModifier);
+                camera.Position += (normalizedCopy * transformMod);
+                camera.FocalPosition += (normalizedCopy * transformMod);
             }
 
             if (VirtualKey.VK_KEY_D.IsDown())
             {
-                Point3 normalizedCopy = normalized.Clone();
+                Point3 normalizedCopy = camera.Normalized.Clone();
 
-                normalizedCopy.X = -normalized.Z;
+                normalizedCopy.X = -camera.Normalized.Z;
                 normalizedCopy.Y = 0;
-                normalizedCopy.Z = normalized.X;
+                normalizedCopy.Z = camera.Normalized.X;
 
-                cameraPos += (normalizedCopy * transformModifier);
-                cameraFocalPos += (normalizedCopy * transformModifier);
+                camera.Position += (normalizedCopy * transformMod);
+                camera.FocalPosition += (normalizedCopy * transformMod);
             }
-
-            process.WriteValue<Point3>(IntPtr.Add(camera, 0x40), cameraPos);
-            process.WriteValue<Point3>(IntPtr.Add(camera, 0x60), cameraFocalPos);
         }
     }	
 }

@@ -57,7 +57,10 @@ namespace Trainer.ComponentUtil
         VK_NUMPAD4 = 0x64,
         VK_NUMPAD5 = 0x65,
         VK_NUMPAD6 = 0x66,
-        VK_NUMPAD8 = 0x68
+        VK_NUMPAD8 = 0x68,
+        VK_LSHIFT = 0xA0,
+        VK_LCONTROL = 0xA2,
+        VK_LMENU = 0xA4
     }
 
     [Flags]
