@@ -153,6 +153,8 @@
     <Compile Include="Trainer\Classes\Padding\Unknown.cs" />
     <Compile Include="Trainer\Classes\Point3.cs" />
     <Compile Include="Trainer\Classes\Tests\Line3Tests.cs" />
+    <Compile Include="Trainer\Classes\Text\DRChar.cs" />
+    <Compile Include="Trainer\Classes\Text\DRStringRef.cs" />
     <Compile Include="Trainer\ComponentUtil\DeepPointer.cs" />
     <Compile Include="Trainer\ComponentUtil\MemoryWatcher.cs" />
     <Compile Include="Trainer\ComponentUtil\ProcessExtensions.cs" />

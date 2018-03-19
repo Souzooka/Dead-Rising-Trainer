@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Timers;
+using Trainer.Classes.Text;
 
 namespace Trainer
 {
@@ -16,6 +17,7 @@ namespace Trainer
         {
             timer.Elapsed += update;
             timer.Start();
+            
         }
 
         private static void update(object sender, EventArgs e)

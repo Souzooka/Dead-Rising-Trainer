@@ -39,6 +39,7 @@ namespace Trainer.Modules
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x6BCA8A), new byte[] { 0x90, 0x90, 0x90, 0x90 });
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x339D76), new byte[] { 0x90, 0x90, 0x90 });
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x14EA96), new byte[] { 0x90, 0x90, 0x90, 0x90 });
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x1F45F0), new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 });
 
             // Resume game execution
             process.ResumeProcess();
@@ -91,6 +92,7 @@ namespace Trainer.Modules
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x6BCA8A), new byte[] { 0x0F, 0x29, 0x47, 0x40 });
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x339D76), new byte[] { 0x0F, 0x29, 0x00 });
             process.WriteBytes(IntPtr.Add(moduleAddr, 0x14EA96), new byte[] { 0x0F, 0x29, 0x41, 0x40 });
+            process.WriteBytes(IntPtr.Add(moduleAddr, 0x1F45F0), new byte[] { 0x01, 0xBB, 0xEC, 0x12, 0x00, 0x00 });
 
             // Resume game execution
             process.ResumeProcess();
