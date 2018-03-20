@@ -7,7 +7,7 @@ using Trainer.ComponentUtil;
 
 namespace Trainer.Classes
 {
-    public class Ref<T> where T : struct
+    public struct Ref<T> where T : struct
     {
         private IntPtr ptr;
 
