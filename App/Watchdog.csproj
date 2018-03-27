@@ -149,6 +149,9 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Trainer\Classes\Camera.cs" />
+    <Compile Include="Trainer\Classes\InGameCameraController.cs" />
+    <Compile Include="Trainer\Classes\GameObject.cs" />
+    <Compile Include="Trainer\Classes\Ref.cs" />
     <Compile Include="Trainer\Classes\Line3.cs" />
     <Compile Include="Trainer\Classes\Padding\Unknown.cs" />
     <Compile Include="Trainer\Classes\Point3.cs" />

@@ -9,16 +9,16 @@ namespace Trainer.Classes
 {
     public struct Ref<T> where T : struct
     {
-        private IntPtr ptr;
+        public IntPtr Ptr;
 
         public T Deref(Process process)
         {
-            return process.ReadValue<T>(ptr);
+            return process.ReadValue<T>(Ptr);
         }
 
         public bool Write(Process process, T obj)
         {
-            return process.WriteValue<T>(ptr, obj);
+            return process.WriteValue<T>(Ptr, obj);
         }
     }
 }

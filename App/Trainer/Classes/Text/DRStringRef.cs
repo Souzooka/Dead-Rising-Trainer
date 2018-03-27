@@ -14,16 +14,16 @@ namespace Trainer.Classes.Text
 
     public struct DRStringRef
     {
-        private IntPtr ptr;
+        public IntPtr Ptr;
 
         public DRStringRef(IntPtr pPtr)
         {
-            ptr = pPtr;
+            Ptr = pPtr;
         }
 
         public string Deref(Process process)
         {
-            IntPtr addr = ptr;
+            IntPtr addr = Ptr;
             StringBuilder sb = new StringBuilder();
             DRChar character = process.ReadValue<DRChar>(addr);
 
@@ -39,7 +39,7 @@ namespace Trainer.Classes.Text
 
         public void Write(Process process, string value, CharWidth width = CharWidth.Default)
         {
-            IntPtr addr = ptr;
+            IntPtr addr = Ptr;
             for (int i = 0; i < value.Length; ++i)
             {
                 process.WriteValue<DRChar>(addr, new DRChar(value[i], false, width));
