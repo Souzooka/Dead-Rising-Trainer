@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using Trainer.Classes.Padding;
 
+
 namespace Trainer.Classes
 {
+    #pragma warning disable CS0169
     public struct GameObject
     {
         private IntPtr a; // 0x0
@@ -457,5 +459,18 @@ namespace Trainer.Classes
         // TODO
 
         public int HealthBarStringIdx; // 0x1D68 (used for string displayed in green HP bar)
+
+        // TODO
+
+        public int ItemNameStringIdx; // 0x36FC
+
+        // TODO
+
+        public bool AimModelSkew; // 0x3722
+
+        // TODO
+
+        public bool ModelVisible; // 0x3726
     }
+    #pragma warning restore CS0169
 }

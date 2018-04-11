@@ -164,6 +164,7 @@
     <Compile Include="Trainer\ComponentUtil\SignatureScanner.cs" />
     <Compile Include="Trainer\ComponentUtil\WinAPI.cs" />
     <Compile Include="Trainer\MainTrainer.cs" />
+    <Compile Include="Trainer\Modules\InfiniteAmmo.cs" />
     <Compile Include="Trainer\Modules\Noclip.cs" />
     <EmbeddedResource Include="Forms\ChangeLog.resx">
       <DependentUpon>ChangeLog.cs</DependentUpon>

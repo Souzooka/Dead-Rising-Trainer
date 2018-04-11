@@ -33,7 +33,7 @@
             this.PAGE1 = new MetroFramework.Controls.MetroTabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.metroCheckBox3 = new MetroFramework.Controls.MetroCheckBox();
-            this.metroCheckBox2 = new MetroFramework.Controls.MetroCheckBox();
+            this.infiniteAmmoCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.noclipCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.debugCameraCheckBox = new MetroFramework.Controls.MetroCheckBox();
             this.PAGE2 = new MetroFramework.Controls.MetroTabPage();
@@ -92,7 +92,7 @@
             this.PAGE1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.PAGE1.Controls.Add(this.label2);
             this.PAGE1.Controls.Add(this.metroCheckBox3);
-            this.PAGE1.Controls.Add(this.metroCheckBox2);
+            this.PAGE1.Controls.Add(this.infiniteAmmoCheckBox);
             this.PAGE1.Controls.Add(this.noclipCheckBox);
             this.PAGE1.Controls.Add(this.debugCameraCheckBox);
             this.PAGE1.HorizontalScrollbarBarColor = true;
@@ -142,28 +142,27 @@
             this.metroCheckBox3.UseCustomForeColor = true;
             this.metroCheckBox3.UseSelectable = true;
             // 
-            // metroCheckBox2
+            // infiniteAmmoCheckBox
             // 
-            this.metroCheckBox2.AutoSize = true;
-            this.metroCheckBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.metroCheckBox2.Enabled = false;
-            this.metroCheckBox2.ForeColor = System.Drawing.Color.Silver;
-            this.metroCheckBox2.Location = new System.Drawing.Point(8, 57);
-            this.metroCheckBox2.Name = "metroCheckBox2";
-            this.metroCheckBox2.Size = new System.Drawing.Size(125, 15);
-            this.metroCheckBox2.Style = MetroFramework.MetroColorStyle.Red;
-            this.metroCheckBox2.TabIndex = 388;
-            this.metroCheckBox2.Text = "(Not implemented)";
-            this.metroCheckBox2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroCheckBox2.UseCustomBackColor = true;
-            this.metroCheckBox2.UseCustomForeColor = true;
-            this.metroCheckBox2.UseSelectable = true;
+            this.infiniteAmmoCheckBox.AutoSize = true;
+            this.infiniteAmmoCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.infiniteAmmoCheckBox.ForeColor = System.Drawing.Color.DarkOrange;
+            this.infiniteAmmoCheckBox.Location = new System.Drawing.Point(8, 57);
+            this.infiniteAmmoCheckBox.Name = "infiniteAmmoCheckBox";
+            this.infiniteAmmoCheckBox.Size = new System.Drawing.Size(100, 15);
+            this.infiniteAmmoCheckBox.Style = MetroFramework.MetroColorStyle.Red;
+            this.infiniteAmmoCheckBox.TabIndex = 388;
+            this.infiniteAmmoCheckBox.Text = "Infinite Ammo";
+            this.infiniteAmmoCheckBox.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.infiniteAmmoCheckBox.UseCustomBackColor = true;
+            this.infiniteAmmoCheckBox.UseCustomForeColor = true;
+            this.infiniteAmmoCheckBox.UseSelectable = true;
+            this.infiniteAmmoCheckBox.CheckedChanged += new System.EventHandler(this.infiniteAmmoCheckBox_CheckedChanged);
             // 
             // noclipCheckBox
             // 
             this.noclipCheckBox.AutoSize = true;
             this.noclipCheckBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.noclipCheckBox.Enabled = true;
             this.noclipCheckBox.ForeColor = System.Drawing.Color.DarkOrange;
             this.noclipCheckBox.Location = new System.Drawing.Point(8, 36);
             this.noclipCheckBox.Name = "noclipCheckBox";
@@ -635,7 +634,7 @@
         private MetroFramework.Controls.MetroButton connect;
         private System.Windows.Forms.Label label2;
         private MetroFramework.Controls.MetroCheckBox metroCheckBox3;
-        private MetroFramework.Controls.MetroCheckBox metroCheckBox2;
+        private MetroFramework.Controls.MetroCheckBox infiniteAmmoCheckBox;
         private MetroFramework.Controls.MetroCheckBox noclipCheckBox;
         private System.Windows.Forms.Label label3;
     }

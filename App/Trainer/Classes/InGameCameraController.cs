@@ -8,6 +8,7 @@ using Trainer.Classes.Padding;
 
 namespace Trainer.Classes
 {
+    #pragma warning disable CS0169
     [StructLayout(LayoutKind.Sequential)]
     public struct InGameCameraController
     {
@@ -83,4 +84,5 @@ namespace Trainer.Classes
         private Unknown16 bk; // 0x270
         public Ref<GameObject> ModelFocus; // 0x280
     }
+    #pragma warning restore CS0169
 }

@@ -71,6 +71,6 @@ namespace Trainer.Classes
         private Unknown16 ay; // 0x180
         private Unknown4 az; // 0x190
     }
+    #pragma warning restore CS0169
 }
 
-#pragma warning restore CS0169 

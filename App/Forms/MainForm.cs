@@ -273,6 +273,11 @@ namespace Ascension.Forms.Dialog.Extras
             MainTrainer.NoclipEnabled = noclipCheckBox.Checked;
         }
 
+        private void infiniteAmmoCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            MainTrainer.InfiniteAmmoEnabled = infiniteAmmoCheckBox.Checked;
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
             MainTabControl.Controls.Remove(TOOL_DEBUG);
