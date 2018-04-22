@@ -457,6 +457,17 @@ namespace Trainer.Classes
         public int Health; // 0x12EC
 
         // TODO
+        public float InvertedVerticalDelta; // 0x1478
+
+        // TODO
+
+        public float MaxSpeed; // 0x153C
+
+        // TODO
+
+        public float CurrentSpeed; // 0x1A74
+
+        // TODO
 
         public int HealthBarStringIdx; // 0x1D68 (used for string displayed in green HP bar)
 

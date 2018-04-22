@@ -123,7 +123,10 @@ namespace Trainer.ComponentUtil
                 });
             }
 
-            ModuleCache.Add(hash, ret.ToArray());
+            if (!ModuleCache.ContainsKey(hash))
+            {
+                ModuleCache.Add(hash, ret.ToArray());
+            }
 
             return ret.ToArray();
         }

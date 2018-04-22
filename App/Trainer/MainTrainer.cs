@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Timers;
-using Trainer.Classes.Text;
+
 
 namespace Trainer
 {
